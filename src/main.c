@@ -1,5 +1,4 @@
 #include "base.h"
-#include <stdbool.h>
 #include <stdio.h>
 
 i32 main(i32 argc, char **argsv) {
@@ -25,3 +24,5 @@ i32 main(i32 argc, char **argsv) {
   fclose(file);
   return 0;
 }
+
+i32 test() { return 0; }

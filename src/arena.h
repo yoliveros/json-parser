@@ -7,4 +7,6 @@ typedef struct {
 
   u64 pos;
   u64 commit_pos;
-} arena;
+} mem_arena;
+
+mem_arena *arena_create(u64 capacity);
