@@ -1,6 +1,17 @@
 #include "base.h"
 #include <stdio.h>
 
+typedef enum {
+  LBRACE,
+  RBRACE,
+  LBRACKET,
+  RBRACKET,
+  COMMA,
+  COLON,
+  STRING,
+  NUMBER
+} token;
+
 i32 main(i32 argc, char **argsv) {
   if (argc != 2) {
     fprintf(stderr, "You are either missing, "
@@ -24,5 +35,3 @@ i32 main(i32 argc, char **argsv) {
   fclose(file);
   return 0;
 }
-
-i32 test() { return 0; }
