@@ -1,3 +1,5 @@
+#pragma once
+
 #include <math.h>
 #include <stdint.h>
 
@@ -10,8 +12,18 @@ typedef uint16_t u16;
 typedef uint32_t u32;
 typedef uint64_t u64;
 
-typedef float_t f32;
+typedef i8 b8;
+typedef i32 b32;
 
-#define KiB(n) ((u64)(n) << 10)
-#define MiB(n) ((u64)(n) << 20)
-#define GiB(n) ((u64)(n) << 30)
+typedef float_t f32;
+typedef double_t f64;
+
+static inline u64 KiB(u64 n) { return n << 10; }
+static inline u64 MiB(u64 n) { return n << 20; }
+static inline u64 GiB(u64 n) { return n << 30; }
+
+static inline u64 MIN(i32 a, i32 b) { return a < b ? a : b; }
+static inline u64 MAX(i32 a, i32 b) { return a > b ? a : b; }
+static inline u64 ALIGN_UP_POW2(u64 n, u64 p) {
+  return (n + (p - 1)) & ~(p - 1);
+}

@@ -1,16 +1,7 @@
+#include "arena.h"
 #include "base.h"
+#include "lexer.h"
 #include <stdio.h>
-
-typedef enum {
-  LBRACE,
-  RBRACE,
-  LBRACKET,
-  RBRACKET,
-  COMMA,
-  COLON,
-  STRING,
-  NUMBER
-} token;
 
 i32 main(i32 argc, char **argsv) {
   if (argc != 2) {
@@ -18,6 +9,8 @@ i32 main(i32 argc, char **argsv) {
                     "or have to many arguments\n");
     return 1;
   }
+
+  mem_arena *perm_arena = arena_create(GiB(1));
 
   char *file_name = argsv[1];
 
@@ -33,5 +26,7 @@ i32 main(i32 argc, char **argsv) {
   }
 
   fclose(file);
+
+  arena_destroy(perm_arena);
   return 0;
 }
