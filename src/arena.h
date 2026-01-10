@@ -24,3 +24,6 @@ void *mem_reserve(u64 size);
 b32 mem_commit(void *ptr, u64 size);
 b32 mem_decommit(void *ptr, u64 size);
 b32 mem_release(void *ptr, u64 size);
+
+#define PUSH_STRUCT(arena, T) (T *)arena_push((arena), sizeof(T))
+#define PUSH_ARRAY(arena, T, n) (T *)arena_push((arena), sizeof(T) * (n))
