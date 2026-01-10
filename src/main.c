@@ -10,7 +10,7 @@ i32 main(i32 argc, char **argsv) {
     return 1;
   }
 
-  mem_arena *perm_arena = arena_create(GiB(1));
+  mem_arena *perm_arena = arena_create(GiB(1), MiB(1));
 
   char *file_name = argsv[1];
 

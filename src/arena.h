@@ -18,4 +18,9 @@ void arena_pop(mem_arena *arena, u64 size);
 void arena_pop_to(mem_arena *arena, u64 pos);
 void arena_clear(mem_arena *arena);
 
-u32 plat_get_pagesize(void);
+u32 get_pagesize(void);
+
+void *mem_reserve(u64 size);
+b32 mem_commit(void *ptr, u64 size);
+b32 mem_decommit(void *ptr, u64 size);
+b32 mem_release(void *ptr, u64 size);
