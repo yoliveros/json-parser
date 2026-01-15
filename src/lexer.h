@@ -1,3 +1,4 @@
+#include "arena.h"
 #include "base.h"
 
 typedef enum {
@@ -32,5 +33,5 @@ typedef struct {
   i32 column;
 } lexer;
 
-token lexer_next_token(lexer *lexer);
 void lexer_init(lexer *lexer, const char *buffer, u64 length);
+token lexer_next_token(lexer *lexer);

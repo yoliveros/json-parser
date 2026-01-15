@@ -2,5 +2,5 @@
   "name": "Yoel",
   "description": "This is a json parser test file",
   "duno": "duno",
-  "list":[1,2,3],
+  "list": [1,2,3]
 }

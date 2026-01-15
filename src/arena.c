@@ -1,5 +1,6 @@
 #include "arena.h"
 #include "base.h"
+#include <stdio.h>
 #include <stdlib.h>
 
 mem_arena *arena_create(u64 reserve_size, u64 commit_size) {
@@ -31,7 +32,8 @@ void *arena_push(mem_arena *arena, u64 size) {
   u64 new_pos = pos_aligned + size;
 
   if (new_pos > arena->reserve_size) {
-    return NULL;
+    fprintf(stderr, "Failed to allocate memory");
+    exit(1);
   }
 
   if (new_pos > arena->commit_pos) {
