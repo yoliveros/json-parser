@@ -1,6 +1,7 @@
 #include "arena.h"
+#include "ast.h"
 #include "base.h"
-#include "lexer.h"
+#include "parser.h"
 #include <stdio.h>
 
 i32 main(i32 argc, char **argsv) {
@@ -41,13 +42,14 @@ i32 main(i32 argc, char **argsv) {
   lexer lx;
   lexer_init(&lx, file_txt, file_size);
 
-  token token;
+  json_value *root = parse_value(perm_arena, &lx);
 
-  do {
-    token = lexer_next_token(&lx);
-  } while (token.type != TOKEN_EOF);
-
-  // TODO: AST
+  if (root) {
+    printf("Parse successful!\n");
+    print_json_value(root, 0);
+  } else {
+    printf("Parse failed!\n");
+  }
 
   fclose(file);
 

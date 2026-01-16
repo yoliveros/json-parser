@@ -27,4 +27,4 @@ run: $(TARGET)
 	./$(TARGET) $(ARGS)
 
 clean:
-	rm -f $(BUILD_DIR)
+	rm -rf $(BUILD_DIR)

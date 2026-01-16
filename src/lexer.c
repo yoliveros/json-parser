@@ -1,6 +1,5 @@
 #include "lexer.h"
 #include <ctype.h>
-#include <new>
 
 void lexer_init(lexer *lx, const char *buffer, u64 length) {
   lx->buffer = buffer;
@@ -47,14 +46,15 @@ static token lexer_string(lexer *lx) {
 
     if (c == '"') {
       const char *end;
-      lexer_advance(lx);
       end = lx->buffer + lx->position;
+      lexer_advance(lx);
       token t;
       t.type = TOKEN_STRING;
       t.lexeme = start;
-      t.length = (i32)(end - start - 1);
+      t.length = (i32)(end - start);
       t.line = line;
       t.column = col;
+
       return t;
     } else if (c == '\n' || c == '\r' || c == '\0') {
       token t;
@@ -78,10 +78,11 @@ static token lexer_string(lexer *lx) {
   return t;
 }
 
-static i32 is_digit(char c) { return c >= '0' && c <= '9'; }
+static b32 is_digit(char c) { return c >= '0' && c <= '9'; }
 
 static token lexer_number(lexer *lx) {
-  const char *start = lx->buffer + lx->position;
+  const char *start = lx->buffer + lx->position - 1;
+
   i32 line = lx->line;
   i32 col = lx->column;
 
@@ -89,7 +90,7 @@ static token lexer_number(lexer *lx) {
     lexer_advance(lx);
   }
 
-  if (!is_digit(lexer_peek(lx))) {
+  if (!is_digit(lx->buffer[lx->position - 1])) {
     token t = {0};
     t.type = TOKEN_ERROR;
     t.lexeme = start;
@@ -173,8 +174,6 @@ token lexer_next_token(lexer *lx) {
 
   token t = {0};
 
-  return t;
-
   if (lexer_at_end(lx)) {
     t.type = TOKEN_EOF;
     t.lexeme = lx->buffer + lx->position;
@@ -249,8 +248,6 @@ token lexer_next_token(lexer *lx) {
     break;
   default:
     if (c == '-' || is_digit(c)) {
-      lx->position--;
-      lx->column--;
       return lexer_number(lx);
     } else {
       t.type = TOKEN_ERROR;
