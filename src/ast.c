@@ -22,7 +22,7 @@ json_value *builder_number(mem_arena *arena, const token *t) {
   return v;
 }
 
-json_value *builder_bool(mem_arena *arena, i32 b) {
+json_value *builder_bool(mem_arena *arena, b32 b) {
   json_value *v = json_new_value(arena, JSON_VALUE_BOOL);
 
   v->as.boolean = b ? 1 : 0;

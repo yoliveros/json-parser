@@ -48,5 +48,5 @@ struct json_value {
 json_value *json_new_value(mem_arena *arena, json_value_type type);
 json_value *builder_string(mem_arena *arena, const token *t);
 json_value *builder_number(mem_arena *arena, const token *t);
-json_value *builder_bool(mem_arena *arena, i32 b);
+json_value *builder_bool(mem_arena *arena, b32 b);
 json_value *builder_null(mem_arena *arena);
